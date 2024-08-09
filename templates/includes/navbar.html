@@ -38,16 +38,13 @@
                     <i class="fa fa-bars"></i> All category 
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-                    <a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-                    <a class="dropdown-item" href="#">Auto / Transportation</a>
-                    <a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-                    <a class="dropdown-item" href="#">Home & Garden / Construction / Lights </a>
-                    <a class="dropdown-item" href="#">Beauty & Personal Care / Health </a> 
+                    {% for category in links %}
+                        <a class="dropdown-item" href="{{category.get_url}}">{{category.category_name}}</a>
+                    {% endfor %}
                 </div>
             </div>  <!-- category-wrap.// -->
         </div> <!-- col.// -->
-        <a href="{% static './store.html' %}" class="btn btn-outline-primary">Store</a>
+        <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
         <div class="col-lg  col-md-6 col-sm-12 col">
             <form action="#" class="search">
                 <div class="input-group w-100">
@@ -66,11 +63,11 @@
                         <div class="widget-header">
                             <small class="title text-muted">Welcome guest!</small>
                             <div> 
-                                <a href="{% static './signin.html' %}">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="{% static './register.html' %}"> Register</a>
+                                <a href="./signin.html">Sign in</a> <span class="dark-transp"> | </span>
+                                <a href="./register.html"> Register</a>
                             </div>
                         </div>
-                        <a href="{% static './cart.html' %}" class="widget-header pl-3 ml-3">
+                        <a href="./cart.html" class="widget-header pl-3 ml-3">
                             <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
                             <span class="badge badge-pill badge-danger notify">0</span>
                         </a>

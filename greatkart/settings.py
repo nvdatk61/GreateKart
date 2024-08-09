@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'category',
     'accounts',
+    'store',
+    'carts',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'category.context_processors.menu_links',
             ],
         },
     },
@@ -127,6 +130,9 @@ STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
     'greatkart/static'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
