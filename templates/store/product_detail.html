@@ -71,7 +71,7 @@
         {% if out_stock %}
           <h4 style="color: red;">Out of stock</h4>
         {% else %}
-          <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+          <a href="{% url 'add_cart' product_detail.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
         {% endif %}
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
