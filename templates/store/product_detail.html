@@ -54,15 +54,10 @@
               </div>
           </div> <!-- row.// -->
           <hr>
-          {% if out_stock %}
+          {% if product_detail.stock <= 0 %}
             <h4 style="color: red;">Out of stock</h4>
           {% else %}
-            {% if in_cart %}
-              <h4 style="color: green;">This product is available in cart</h4>
-              <a href="{% url 'cart' %}" class="btn  btn-primary"> <span class="text">View cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-            {% else %}
-              <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
-            {% endif %}
+                <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
           {% endif %}
       </article> <!-- product-info-aside .// -->
   </form>
