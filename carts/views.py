@@ -18,14 +18,11 @@ def add_cart(request, product_id):
         for item in request.POST:
             key = item 
             value = request.POST[key]
-            print(key, value, request, request)
 
             try:
                 variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
                 product_variation.append(variation)
-                print(variation)
             except Exception as e:
-                print(e)
                 pass
     
     try:
@@ -40,13 +37,12 @@ def add_cart(request, product_id):
         cart_item = CartItem.objects.filter(product=product, cart=cart)
         ex_var_exists = []
         id = []
+
         for item in cart_item:
             existing_variation = item.variations.all()
             ex_var_exists.append(list(existing_variation))
             id.append(item.id)
-
         if product_variation in ex_var_exists:
-            print('ex_var_exists',ex_var_exists)
             index = ex_var_exists.index(product_variation)
             item_id = id[index]
             item = CartItem.objects.get(product=product, id=item_id)
@@ -84,7 +80,21 @@ def sub_cart(request, product_id):
         cart_item.delete()
     return redirect('cart')
 
-def remove_cart(request, product_id):
+def remove_cart(request, product_id, cart_item_id=None):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    product = get_object_or_404(Product, id=product_id)
+    try:
+        cart_item = CartItem.objects.filter(product=product, cart=cart, id=cart_item_id)
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+    except:
+        pass
+    return redirect('cart')
+
+def remove_cart_item(request, product_id):
     cart = Cart.objects.get(cart_id=_cart_id(request))
     product = get_object_or_404(Product, id=product_id)
     cart_item = CartItem.objects.filter(product=product, cart=cart)
